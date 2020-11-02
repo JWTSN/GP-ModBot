@@ -1,16 +1,27 @@
 const Discord = require('discord.js');
-const { modChannel, footer, logo, rejoinLink, useRole } = require('../config.json');
+const { modChannel, footer, logo, rejoinLink} = require('../config.json');
 module.exports = {
 	name: 'kick',
 	description: 'Kick a member',
 	guildOnly: true,
-	execute(message, args) {
-	if(message.member.hasPermission("KICK_MEMBERS")) {
+	execute: function (message, args) {
+		if (message.channel.type === 'dm') {
+			message.channel.send('That command cannot be executed in DMs!')
+		}
+		return;
+
+		if (message.member.hasPermission("KICK_MEMBERS")) {
+			message.guild.channels.cache.get(modChannel).send(`${message.author} tried to use an admin command without sufficient permissions!`);
+			message.channel.send(":no_entry: You do not have the right permissions!")
+		}
+		return;
+
 		function sleep(ms) {
 			return new Promise(resolve => setTimeout(resolve, ms));
 		}
 
 		const user = message.mentions.users.first();
+
 		if (args[1]) {
 			const reason = args[1];
 			if (user) {
@@ -60,9 +71,5 @@ module.exports = {
 		} else {
 			message.channel.send(':no_entry: You didn\'t inclue a reason!');
 		}
-	}else{
-		message.guild.channels.cache.get(modChannel).send(`${message.author} tried to use an admin command without sufficient permissions!`);
-		message.channel.send(":no_entry: You do not have the right permissions!")
-	}
 	},
 };
