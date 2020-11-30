@@ -8,8 +8,15 @@ module.exports = {
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
-        if (message.channel.type === 'dm') {message.channel.send('That command cannot be executed in DMs!')} return;
-        if(message.member.hasPermission("BAN_MEMBERS")) {
+        if (message.channel.type === 'dm') {message.channel.send('That command has been disabled in DMs!')} return;
+
+        if(!message.member.hasPermission("BAN_MEMBERS")) {
+            message.guild.channels.cache.get(modChannel).send(`${message.author} tried to use an admin command without sufficient permissions!`);
+            message.channel.send(":no_entry: You do not have the right permissions!");
+            return;
+        }
+
+
             const user = message.mentions.users.first();
             if (args[1]) {
                 const reason = args[1];
@@ -66,6 +73,6 @@ module.exports = {
             } else {
                 message.reply(':no_entry: You didn\'t inclue a reason!');
             }
-        }
+
     },
 };

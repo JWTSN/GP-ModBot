@@ -6,15 +6,17 @@ module.exports = {
 	guildOnly: true,
 	execute: function (message, args) {
 		if (message.channel.type === 'dm') {
-			message.channel.send('That command cannot be executed in DMs!')
+			message.channel.send('That command has been disabled in DMs!')
+			return;
 		}
-		return;
 
-		if (message.member.hasPermission("KICK_MEMBERS")) {
+
+		if (!message.member.hasPermission("KICK_MEMBERS")) {
 			message.guild.channels.cache.get(modChannel).send(`${message.author} tried to use an admin command without sufficient permissions!`);
-			message.channel.send(":no_entry: You do not have the right permissions!")
+			message.channel.send(":no_entry: You do not have the right permissions!");
+			return;
 		}
-		return;
+
 
 		function sleep(ms) {
 			return new Promise(resolve => setTimeout(resolve, ms));
@@ -38,7 +40,7 @@ module.exports = {
 						.setFooter(footer, 'https://cdn.jwacre.com/images/JwLogo.png');
 					member.send(kickEmbedDM).then(r => {
 						console.log(`Sent a DM to ${user.tag}`)
-						console.log(`${user.tag} was kicked by ${message.author.username}+'#'+${message.author.discriminator}`)
+						console.log(`${user.tag} was kicked by ${message.author.username}#${message.author.discriminator}`)
 					});
 
 					const kickEmbedLOGS = new Discord.MessageEmbed()
@@ -71,5 +73,6 @@ module.exports = {
 		} else {
 			message.channel.send(':no_entry: You didn\'t inclue a reason!');
 		}
+
 	},
 };
