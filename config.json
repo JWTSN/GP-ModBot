@@ -1,10 +1,10 @@
 {
   "prefix": "!",
-  "token": "NzcxMTA3NDk0MDU4NjU1Nzg0.X5nT0Q.rENn1O2URcZ5mwA12NiK3PoR9CA",
+  "token": "TOKEN",
   "modChannel": "784282514063491072",
   "footer": "v2020.12.04",
   "Logo": "https://cdn.jwacre.com/images/JwLogo.png",
-  "rejoinLink": "https://discord.gg/JHzqkhxNGx",
+  "rejoinLink": "REJOIN LINK",
   "COMMENT1": "SET USESQL TO Y TO USE SQL AND N TO DISABLE IT",
   "useSQL": "n",
   "sqlHost": "HOST",
