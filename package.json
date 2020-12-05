@@ -1,15 +1,17 @@
 {
   "name": "mod-bot-project",
-  "version": "v2020.11.30",
+  "version": "v2020.12.04",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "JW#9999/ JwAcre",
-  "license": "GPL V3",
+  "license": "GPL-3.0 License",
   "dependencies": {
-    "discord.js": "^12.4.1"
+    "@types/node": "^14.14.10",
+    "discord.js": "^12.4.1",
+    "mysql": "^2.18.1"
   }
 }

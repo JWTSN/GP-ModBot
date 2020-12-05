@@ -1,11 +1,14 @@
 const fs = require('fs');
 const Discord = require('discord.js');
-const { prefix, token } = require('./config.json');
+const { prefix, token, modChannel } = require('./config.json');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
+//COMMAND FILES
+
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.ts'));
 
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
@@ -16,7 +19,7 @@ for (const file of commandFiles) {
 const cooldowns = new Discord.Collection();
 
 client.once('ready', () => {
-    console.log(`logged in as ${client.tag}`);
+    console.log(`logged in as ${client.user.tag}`);
 });
 
 client.on('message', message => {
@@ -25,13 +28,11 @@ client.on('message', message => {
     const commandName = args.shift().toLowerCase();
     const command = client.commands.get(commandName)
         || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+
     if (!command) return;
-    /*if (command.guildOnly && message.channel.type === 'dm') {
-        return message.reply('I can\'t execute that command inside DMs!');
-    }*/
+
     if (command.args && !args.length) {
         let reply = `You didn't provide any arguments, ${message.author}!`;
-
         if (command.usage) {
             reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
         }
@@ -62,6 +63,20 @@ client.on('message', message => {
         console.error(error);
         message.reply('there was an error trying to execute that command!');
     }
+});
+
+client.on('guildMemberAdd', member => {
+    console.log(`member`);
+    /*member.guild.channels.get('channelID').send("Welcome");
+    const joinEmbedLOGS = new Discord.MessageEmbed()
+        .setColor('#37ff00')
+        .setTitle(`${member} has joined`)
+        .setURL('https://jwacre.com/')
+        .addField('User joined!', `${member} has joined`, false)
+        .setThumbnail('http://cdn.jwacre.com/images/JwLogo.png')
+        .setTimestamp()
+        .setFooter(footer, 'http://cdn.jwacre.com/images/JwLogo.png');
+    member.guild.channels.cache.get(modChannel).send(joinEmbedLOGS);*/
 });
 
 client.login(token);

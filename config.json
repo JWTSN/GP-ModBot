@@ -1,8 +1,14 @@
 {
   "prefix": "!",
-  "token": "TOKEN",
-  "modChannel": "772438461642309634",
-  "footer": "v2020.11.30",
+  "token": "NzcxMTA3NDk0MDU4NjU1Nzg0.X5nT0Q.rENn1O2URcZ5mwA12NiK3PoR9CA",
+  "modChannel": "784282514063491072",
+  "footer": "v2020.12.04",
   "Logo": "https://cdn.jwacre.com/images/JwLogo.png",
-  "rejoinLink": "Rejoin invite Link"
+  "rejoinLink": "https://discord.gg/JHzqkhxNGx",
+  "COMMENT1": "SET USESQL TO Y TO USE SQL AND N TO DISABLE IT",
+  "useSQL": "n",
+  "sqlHost": "HOST",
+  "sqlUser": "USERNAME",
+  "sqlPass": "PASSWORD (not needed but but recommended)",
+  "sqlDB": "DATABASE"
 }
